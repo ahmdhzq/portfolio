@@ -10,28 +10,7 @@ const Pill = styled.div`
   font-size: 14px;
 `;
 
-const HeroButton = styled.button`
-  padding: 16px 32px;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  background-color: #FFFFFF;
-  color: #121212;
 
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-
-const HeroImagePlaceholder = styled.div`
-  width: 400px;
-  height: 500px;
-  background-color: #1C1C1E;
-  border-radius: 20px;
-`;
 
 const HeroSection = () => {
     return (
@@ -67,15 +46,19 @@ const HeroSection = () => {
                             <p className="text-text-gray">Students Mentored</p>
                         </div>
                         <div className="stat">
-                            <strong className="text-3xl font-extrabold text-text-light">1+ Year</strong>
+                            <strong className="text-3xl font-extrabold text-text-light">2+ Year</strong>
                             <p className="text-text-gray">Professional Experience</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Right Content (Image) */}
-                <div className="flex-1 lg:flex justify-center items-center hidden">
-                    <HeroImagePlaceholder />
+                <div className="flex-1 lg:flex max-w-max hidden">
+                    <img
+                        src="/assets/profile.jpeg"
+                        alt="Foto profil Ahmad Haziq"
+                        className="w-[400px] h-[500px] object-cover rounded-3xl shadow-lg"
+                    />
                 </div>
 
             </div>
