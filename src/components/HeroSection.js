@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { GoArrowUpRight } from "react-icons/go";
 
 const Pill = styled.div`
   display: inline-block;
@@ -34,7 +35,7 @@ const HeroImagePlaceholder = styled.div`
 
 const HeroSection = () => {
     return (
-        <div className="bg-bg-dark text-text-light rounded-3xl md:rounded-[3rem]">
+        <div className="bg-bg-dark mt-20 container mx-auto text-text-light rounded-3xl md:rounded[3rem]">
             <div className="flex justify-between items-center py-20 px-[10%] gap-10 font-manrope">
 
                 {/* Left Content */}
@@ -43,13 +44,18 @@ const HeroSection = () => {
                         <Pill>Ahmad Haziq Mu'izzaddin Wafiq</Pill>
                     </div>
                     <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-4 max-w-2xl text-text-light">
-                        Building Responsive & User-Centric Web Apps
+                        Transforming Ideas into Engaging Web Experiences
                     </h1>
                     <p className="text-lg text-text-gray mb-8 max-w-xl">
-                        A results-focused Frontend Developer with over a year of experience in building responsive and efficient web applications using React.js and Next.js.
+                        I am a developer passionate about translating complex ideas into beautiful, functional, and user-friendly web applications. My focus is on bridging the gap between user needs and business goals to create intuitive digital experiences that deliver real value.
                     </p>
-                    <div className="mb-10">
-                        <HeroButton>See My Work ↙</HeroButton>
+                    <div className="mb-10 flex items-center">
+                        <button className="px-8 py-4 border-2 border-white rounded-full text-black bg-white text-base cursor-pointer transition-all duration-200">
+                            See My Work
+                        </button>
+                        <div className="w-14 h-14 border-2 border-white rounded-full bg-transparent text-white inline-flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-white hover:text-black hover:scale-105">
+                            <GoArrowUpRight size={24} />
+                        </div>
                     </div>
                     <div className="flex flex-col md:flex-row gap-10">
                         <div className="stat">
