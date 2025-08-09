@@ -2,6 +2,7 @@ import React from 'react';
 import HeroSection from './components/HeroSection';
 import WhyWorkWithUs from './components/WhyWorkWithUs';
 import Navbar from './components/Navbar';
+import ProjectsSection from './components/ProjectsSection';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Navbar />
         <HeroSection />
         <WhyWorkWithUs />
+        <ProjectsSection />
       </main>
     </div>
   );

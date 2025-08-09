@@ -32,7 +32,7 @@ const HeroSection = () => {
                         <button className="px-8 py-4 border-2 border-white rounded-full text-black bg-white text-base cursor-pointer transition-all duration-200">
                             See My Work
                         </button>
-                        <div className="w-14 h-14 border-2 border-white rounded-full bg-transparent text-white inline-flex items-center justify-center cursor-pointer transition-all duration-200 hover:bg-white hover:text-black hover:scale-105">
+                        <div className="w-14 h-14 border-2 border-white rounded-full bg-transparent text-white inline-flex items-center justify-center cursor-pointer transition-all duration-200  hover:rotate-45">
                             <GoArrowUpRight size={24} />
                         </div>
                     </div>
