@@ -11,11 +11,10 @@ const Pill = styled.div`
 `;
 
 
-
 const HeroSection = () => {
     return (
         <div className="bg-bg-dark mt-20 container mx-auto text-text-light rounded-3xl md:rounded[3rem]">
-            <div className="flex justify-between items-center py-20 px-[10%] gap-10 font-manrope">
+            <div className="flex justify-between items-center py-20 mb-10 px-[10%] gap-10 font-manrope">
 
                 {/* Left Content */}
                 <div className="flex-1">

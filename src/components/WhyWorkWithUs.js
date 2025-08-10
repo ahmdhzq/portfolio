@@ -9,7 +9,6 @@ const WhyWorkWithUs = () => {
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
         <FeatureCard number="01" title="Reusable Components">
             Proven success in boosting development efficiency by up to 30% through the creation of reusable and modular components.
         </FeatureCard>
@@ -21,7 +20,6 @@ const WhyWorkWithUs = () => {
         <FeatureCard number="03" title="User-Focused Approach">
             Combines technical expertise with experience in User Acceptance Testing (UAT) to ensure products are not only well-built, but also align with user needs.
         </FeatureCard>
-
       </div>
     </div>
   );

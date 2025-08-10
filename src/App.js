@@ -35,8 +35,8 @@ function App() {
       <Navbar isOverDark={isNavbarOverDark} />
       <main>
         <HeroSection ref={heroSectionRef} />
-        <AboutMe/>
         <WhyWorkWithUs />
+        <AboutMe/>
         <ProjectsSection />
       </main>
     </div>
