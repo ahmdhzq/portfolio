@@ -2,6 +2,7 @@ import React from 'react';
 import { BsBriefcase, BsCodeSlash } from "react-icons/bs";
 import { IoRocketOutline } from "react-icons/io5";
 import { GoVerified } from "react-icons/go";
+import DownloadButton from './DownloadButton';
 
 const StatItem = ({ icon, value, label, isBlack = false }) => {
     return (
@@ -45,9 +46,10 @@ const AboutMe = () => {
         <div className="py-12 px-[10%] font-manrope bg-bg-light">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start">
                 <div className="lg:col-span-1">
-                    <h2 className="text-8xl font-extrabold text-text-dark sticky top-24">
+                    <h2 className="text-8xl font-extrabold text-text-dark top-24">
                         A Little More About Me
                     </h2>
+                    <DownloadButton />
                 </div>
                 
                 <div className="lg:col-span-2">

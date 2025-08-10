@@ -4,6 +4,7 @@ import WhyWorkWithUs from './components/WhyWorkWithUs';
 import Navbar from './components/Navbar';
 import ProjectsSection from './components/ProjectsSection';
 import AboutMe from './components/AboutMe';
+import ServicesSection from './components/ServicesSection';
 
 function App() {
   const heroSectionRef = useRef(null);
@@ -37,6 +38,7 @@ function App() {
         <HeroSection ref={heroSectionRef} />
         <WhyWorkWithUs />
         <AboutMe/>
+        <ServicesSection />
         <ProjectsSection />
       </main>
     </div>
