@@ -21,7 +21,7 @@ const StatItem = ({ icon, value, label, isBlack = false }) => {
                 <div className='absolute top-9 left-3 z-20 text-bg-card'>
                     {icon}
                 </div>
-                
+
                 <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center">
                     <p className={`text-5xl font-extrabold 
                         ${isBlack ? 'text-text-light' : 'text-gray-800'}`
@@ -51,7 +51,7 @@ const AboutMe = () => {
                     </h2>
                     <DownloadButton />
                 </div>
-                
+
                 <div className="lg:col-span-2">
                     <h3 className="text-3xl font-bold text-text-dark mb-4">
                         Passionate Software Developer with a Vision

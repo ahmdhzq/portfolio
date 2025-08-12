@@ -1,38 +1,29 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import { IoSparkles } from 'react-icons/io5';
-
-const DownloadButton = () => {
-    return (
-        <a
-            href="#"
-            download="nama-file-cv.pdf"
-            className="group inline-flex items-center justify-center my-8"
-        >
-            <div
-                className="
-            bg-black text-white  
-            flex items-center 
-            py-4 pl-8 pr-6 
-            rounded-l-full 
-            font-bold text-lg 
-            transition-transform duration-300 ease-in-out
-            group-hover:scale-105"
-            >
-                <span>Download CV</span>
-            </div>
-            <div
-                className="
-        bg-black text-white  
-        p-4 
-        rounded-r-full 
-        transition-transform duration-300 ease-in-out
-        group-hover:scale-105"
-            >
-                <IoSparkles size={28} />
-            </div>
-        </a>
-    );
-};
-
+import * as React from "react";
+const DownloadButton = (props) => (
+    <svg
+        width={220}
+        height={110.601}
+        viewBox="0 0 220 110.601"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+    >
+        <path
+            fill="#121212"
+            d="M219.459 55.3a24.046 24.046 0 0 1 -24.044 24.044 24.046 24.046 0 0 1 -24.043 -24.044 24.044 24.044 0 0 1 48.088 0"
+        />
+        <path
+            d="M185.648 59.078a24.046 24.046 0 0 0 -26.201 -5.212 23.98 23.98 0 0 0 -7.801 5.212l9.944 9.944a9.982 9.982 0 0 1 14.115 0z"
+            fill="#121212"
+        />
+        <path
+            d="M185.648 51.605a24.046 24.046 0 0 1 -34.002 0l9.944 -9.943a9.982 9.982 0 0 0 14.115 0z"
+            fill="#121212"
+        />
+        <path
+            fill="#121212"
+            d="M24.044 31.257h117.814a24.046 24.046 0 0 1 24.044 24.044 24.046 24.046 0 0 1 -24.044 24.044H24.044A24.046 24.046 0 0 1 0 55.3a24.046 24.046 0 0 1 24.044 -24.044"
+        />
+    </svg>
+);
 export default DownloadButton;
