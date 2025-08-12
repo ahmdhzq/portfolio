@@ -11,19 +11,19 @@ const StatItem = ({ icon, value, label, isBlack = false }) => {
                 <svg
                     viewBox="0 0 258 140"
                     className={`absolute inset-0 w-full h-full 
-                        ${isBlack ? 'fill-bg-card stroke-border-color' : 'fill-white stroke-border-color'}`
+                        ${isBlack ? 'fill-bg-card stroke-border-color' : 'fill-none stroke-border-color'}`
                     }
                     xmlns="http://www.w3.org/2000/svg"
                 >
                     <path d="M47 25V21C47 9.95431 55.9543 1 67 1H237.5C248.546 1 257.5 9.95431 257.5 21V119C257.5 130.046 248.546 139 237.5 139H21C9.95431 139 1.00001 130.046 1.00001 119L1 65C1 53.9543 9.95431 45 21 45H27C38.0457 45 47 36.0457 47 25Z" />
                 </svg>
 
-                <div className='absolute top-9 left-3 z-20 text-bg-card'>
+                <div className='absolute top-6 left-1 md:top-9 md:left-3 z-20 text-bg-card'>
                     {icon}
                 </div>
 
                 <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center">
-                    <p className={`text-5xl font-extrabold 
+                    <p className={`text-3xl md:text-5xl font-extrabold 
                         ${isBlack ? 'text-text-light' : 'text-gray-800'}`
                     }>
                         {value}

@@ -1,18 +1,11 @@
-// src/components/FeatureCard.js
-
 import React from 'react';
 import styled from 'styled-components';
 
-// 1. Kita buat 'CardWrapper' menggunakan styled-components
 const CardWrapper = styled.div`
   position: relative;
-  padding: 2.5rem; // 40px
-  border-radius: 1.5rem; // 24px
-  background-color: ${props => props.theme === 'light' ? '#FFFFFF' : 'var(--bg-dark)'};
-  border: 1px solid ${props => props.theme === 'light' ? '#E5E7EB' : 'var(--border-color)'};
-  color: ${props => props.theme === 'light' ? 'var(--text-dark)' : 'var(--text-light)'};
+  padding: 2.5rem;
+  border-radius: 1.5rem; 
 
-  /* 2. Ini adalah bagian untuk membuat segitiga 'callout' */
   &::after {
     content: '';
     position: absolute;
@@ -21,23 +14,14 @@ const CardWrapper = styled.div`
     top: 40px; 
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
-
-    /* 3. Logika untuk menentukan arah dan warna segitiga */
-    ${props => props.direction === 'left' ? `
-      left: -20px;
-      border-right: 20px solid ${props.theme === 'light' ? '#FFFFFF' : 'var(--bg-dark)'};
-    ` : `
-      right: -20px;
-      border-left: 20px solid ${props.theme === 'light' ? '#FFFFFF' : 'var(--bg-dark)'};
-    `}
   }
 `;
 
-const FeatureCard = ({ number, title, children, theme = 'light', direction = 'left' }) => {
+const FeatureCard = ({ number, title, children,}) => {
     return (
-        <CardWrapper theme={theme} direction={direction}>
+        <CardWrapper className='border-2'>
             <div className="relative">
-                <span className={`absolute -top-8 -left-4 text-8xl font-extrabold z-0 ${theme === 'light' ? 'text-gray-100' : 'text-gray-800/50'}`}>
+                <span className="absolute -top-8 -left-4 text-8xl font-extrabold z-0 text-gray-200">
                     {number}
                 </span>
                 
