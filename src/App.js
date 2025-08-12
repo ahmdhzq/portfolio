@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import ProjectsSection from './components/ProjectsSection';
 import AboutMe from './components/AboutMe';
 import ServicesSection from './components/ServicesSection';
+import SkillsRibbon from './components/SkillsRibbon';
 
 function App() {
   const heroSectionRef = useRef(null);
@@ -38,6 +39,7 @@ function App() {
         <HeroSection ref={heroSectionRef} />
         <WhyWorkWithUs />
         <AboutMe/>
+        <SkillsRibbon />
         <ServicesSection />
         <ProjectsSection />
       </main>
