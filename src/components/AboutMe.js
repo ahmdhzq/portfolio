@@ -3,6 +3,7 @@ import { BsBriefcase, BsCodeSlash } from "react-icons/bs";
 import { IoRocketOutline } from "react-icons/io5";
 import { GoVerified } from "react-icons/go";
 import DownloadButton from './DownloadButton';
+import { motion } from 'framer-motion';
 
 const StatItem = ({ icon, value, label, isBlack = false }) => {
     return (
@@ -39,20 +40,45 @@ const StatItem = ({ icon, value, label, isBlack = false }) => {
     );
 };
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
 
 const AboutMe = () => {
-
     return (
         <div className="py-12 px-[10%] font-manrope bg-bg-light">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start">
-                <div className="lg:col-span-1">
+            <motion.div 
+                className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start"
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+            >
+                <motion.div className="lg:col-span-1" variants={itemVariants}>
                     <h2 className="text-8xl font-extrabold text-text-dark top-24">
                         A Little More About Me
                     </h2>
                     <DownloadButton />
-                </div>
+                </motion.div>
 
-                <div className="lg:col-span-2">
+                <motion.div className="lg:col-span-2" variants={itemVariants}>
                     <h3 className="text-3xl font-bold text-text-dark mb-4">
                         Passionate Software Developer with a Vision
                     </h3>
@@ -60,7 +86,7 @@ const AboutMe = () => {
                         A results-oriented Software Developer specializing in frontend development, passionate about creating seamless and efficient user experiences by translating UI/UX designs into high-quality, maintainable code.
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 ">
+                    <motion.div className="grid grid-cols-1 sm:grid-cols-2" variants={itemVariants}>
                         <StatItem
                             icon={<BsBriefcase size={33} />}
                             value="2+ Year"
@@ -85,9 +111,9 @@ const AboutMe = () => {
                             label="Certifications"
                             isBlack={false}
                         />
-                    </div>
-                </div>
-            </div>
+                    </motion.div>
+                </motion.div>
+            </motion.div>
         </div>
     );
 };

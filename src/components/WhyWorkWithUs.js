@@ -1,27 +1,67 @@
 import React from 'react';
 import FeatureCard from './FeaturedCard';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
 
 const WhyWorkWithUs = () => {
   return (
-    <div className="py-20 px-[10%] font-manrope">
-      <h2 className="text-5xl font-extrabold text-center mb-12">
-        Why Work With Me?
-      </h2>
+    <motion.div 
+        className="py-20 px-[10%] font-manrope"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+    >
+      <motion.h2 
+        className="text-5xl font-extrabold text-center mb-12 flex justify-center items-center gap-4"
+        variants={itemVariants}
+      >
+        How I Build <span className='bg-bg-dark text-text-light px-6 py-3 rounded-full font-extralight text-2xl'>Great App</span>
+      </motion.h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <FeatureCard number="01" title="Reusable Components">
-            Proven success in boosting development efficiency by up to 30% through the creation of reusable and modular components.
-        </FeatureCard>
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        variants={containerVariants}
+      >
+        <motion.div variants={itemVariants}>
+            <FeatureCard number="01" title="Reusable Components">
+                Proven success in boosting development efficiency by up to 30% through the creation of reusable and modular components.
+            </FeatureCard>
+        </motion.div>
 
-        <FeatureCard number="02" title="Full-Stack Foundation">
-            Experienced with both frontend (React, Next.js) and backend technologies (Laravel, Node.js), ensuring a comprehensive understanding of the full development lifecycle.
-        </FeatureCard>
+        <motion.div variants={itemVariants}>
+            <FeatureCard number="02" title="Full-Stack Foundation">
+                Experienced with both frontend (React, Next.js) and backend technologies (Laravel, Node.js), ensuring a comprehensive understanding of the full development lifecycle.
+            </FeatureCard>
+        </motion.div>
         
-        <FeatureCard number="03" title="User-Focused Approach">
-            Combines technical expertise with experience in User Acceptance Testing (UAT) to ensure products are not only well-built, but also align with user needs.
-        </FeatureCard>
-      </div>
-    </div>
+        <motion.div variants={itemVariants}>
+            <FeatureCard number="03" title="User-Focused Approach">
+                Combines technical expertise with experience in User Acceptance Testing (UAT) to ensure products are not only well-built, but also align with user needs.
+            </FeatureCard>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

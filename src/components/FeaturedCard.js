@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const CardWrapper = styled.div`
   position: relative;
   padding: 2.5rem;
+  height: 250px;
   border-radius: 1.5rem; 
 
   &::after {

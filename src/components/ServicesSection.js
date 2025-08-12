@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const servicesData = [
     {
@@ -22,18 +23,59 @@ const servicesData = [
         description: 'Streamlining system functionalities by integrating APIs and enhancing overall performance.'
     }
 ];
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2 // Jeda antar item layanan
+        }
+    }
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
+
 
 const ServicesSection = () => {
     return (
-        <div id="services" className="bg-white font-manrope py-24 px-[10%]">
+        // 3. Terapkan motion ke kontainer utama
+        <motion.div 
+            id="services" 
+            className="font-manrope py-20 px-[10%]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+        >
             <div className="max-w-7xl mx-auto">
-                <h2 className="text-6xl lg:text-7xl font-extrabold text-gray-900 mb-20 tracking-tight">
+                <motion.h2 
+                    className="text-6xl lg:text-7xl font-extrabold text-gray-900 mb-10 tracking-tight"
+                    variants={itemVariants}
+                >
                     Services
-                </h2>
+                </motion.h2>
 
-                <div className="border-t border-gray-200">
+                <motion.div 
+                    className="border-t border-gray-200"
+                    // Varian container di sini untuk men-stagger list layanan
+                    variants={containerVariants}
+                >
                     {servicesData.map((service, index) => (
-                        <div key={index} className="py-12 border-b border-gray-200">
+                        // Setiap item layanan diberi animasi
+                        <motion.div 
+                            key={index} 
+                            className="py-8 border-b border-gray-200"
+                            variants={itemVariants}
+                        >
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                                 
                                 <div className="md:col-span-3 lg:col-span-2">
@@ -55,11 +97,11 @@ const ServicesSection = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
