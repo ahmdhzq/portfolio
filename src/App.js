@@ -7,7 +7,7 @@ import AboutMe from './components/AboutMe';
 import ServicesSection from './components/ServicesSection';
 import SkillsRibbon from './components/SkillsRibbon';
 import MostUsefulTools from './components/MostUseFullTools';
-import EducationSection from './components/EducationSection';
+import CredentialsSection from './components/CredentialsSection';
 
 function App() {
 
@@ -18,9 +18,9 @@ function App() {
         <HeroSection/>
         <WhyWorkWithUs />
         <AboutMe/>
-        <ServicesSection />
         <MostUsefulTools/>
-        <EducationSection/>
+        <ServicesSection />
+        <CredentialsSection />
         <ProjectsSection />
         <SkillsRibbon />
       </main>

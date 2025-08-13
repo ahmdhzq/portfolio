@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiChevronDown } from "react-icons/fi";
+import { GoArrowRight } from "react-icons/go";
 
 const servicesData = [
     {
@@ -56,9 +56,18 @@ const ServicesSection = () => {
     return (
         <section
             id="services"
-            className="font-manrope my-16 py-16 px-[10%] bg-bg-dark text-text-light"
+            className="font-manrope my-16 py-16 px-[10%] bg-bg-dark text-text-light relative"
         >
-            <div className="max-w-7xl mx-auto">
+            <div
+                className="absolute inset-0 z-0 opacity-10"
+                style={{
+                    backgroundImage: `url('/bg-warpedline-1.svg')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            />
+
+            <div className="max-w-7xl mx-auto relative">
                 {/* Title */}
                 <motion.h2
                     className="text-6xl lg:text-7xl font-extrabold mb-10 tracking-tight"
@@ -82,7 +91,7 @@ const ServicesSection = () => {
                         <motion.div
                             key={index}
                             variants={itemVariants}
-                            className="py-8 border-b border-border-color relative group"
+                            className="py-8 border-b border-border-color group"
                         >
                             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                                 <div className="md:col-span-3 lg:col-span-2">
@@ -90,29 +99,24 @@ const ServicesSection = () => {
                                         {service.number}
                                     </p>
                                 </div>
-
                                 <div className="md:col-span-8 lg:col-span-9">
                                     <h3 className="text-3xl font-extrabold tracking-wide uppercase group-hover:text-accent transition-colors duration-300">
                                         {service.title}
                                     </h3>
                                 </div>
-
                                 <div className="md:col-span-1 flex justify-end items-center">
                                     <motion.button
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.95 }}
                                         onClick={() => toggleService(index)}
-                                        className="p-2 rounded-full hover:bg-border-color transition"
+                                        className="p-2 rounded-full transition"
                                     >
-                                        <FiChevronDown
-                                            className={`w-6 h-6 transition-transform ${openIndex === index ? "rotate-180" : ""
-                                                }`}
-                                        />
+                                        <div className="w-14 h-14 border-2 border-white rounded-full bg-transparent text-white inline-flex items-center justify-center cursor-pointer transition-all duration-200 hover:rotate-90">
+                                            <GoArrowRight size={24} />
+                                        </div>
                                     </motion.button>
                                 </div>
                             </div>
-
-                            {/* Expandable Description */}
                             <AnimatePresence>
                                 {openIndex === index && (
                                     <motion.div
