@@ -5,8 +5,8 @@ const Navbar = () => {
 
     return (<>
         <div className="fixed container top-4 left-1/2 -translate-x-1/2 z-50">
-            <div className="bg-bg-card/20 backdrop-blur-lg text-text-light py-2.5 px-6 rounded-full shadow-lg border border-white/10">
-                <nav className='flex items-center justify-between'>
+            <div className="bg-bg-dark/20 backdrop-blur-lg text-text-light py-2.5 px-6 rounded-full shadow-lg border border-white/10">
+                <nav className='flex items-center justify-between '>
                     <ul className="flex items-center gap-x-6 text-lg font-bold">
                         <h2>Ahmdhzq</h2>
                     </ul>
@@ -27,7 +27,7 @@ const Navbar = () => {
 
         </div>
         <div className="fixed container top-4 left-1/2 -translate-x-1/2 -z-50">
-            <div className="bg-bg-card py-6 px-6 rounded-full">
+            <div className="bg-bg-dark py-6 px-6 rounded-full">
             </div>
         </div>
     </>
