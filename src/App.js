@@ -18,9 +18,9 @@ function App() {
         <HeroSection/>
         <WhyWorkWithUs />
         <AboutMe/>
+        <CredentialsSection />
         <MostUsefulTools/>
         <ServicesSection />
-        <CredentialsSection />
         <ProjectsSection />
         <SkillsRibbon />
       </main>

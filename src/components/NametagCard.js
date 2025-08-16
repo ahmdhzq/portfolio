@@ -1,160 +1,144 @@
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Physics, RigidBody, useRopeJoint } from '@react-three/rapier';
-import { OrbitControls, Text, RoundedBox, Circle, Box } from '@react-three/drei';
+/* eslint-disable react/no-unknown-property */
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
+import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
 
+extend({ MeshLineGeometry, MeshLineMaterial });
 
-// --- BAGIAN YANG DIPERBAIKI ADA DI SINI ---
+export default function Lanyard({ position = [0, 0, 22], gravity = [0, -40, 0], fov = 17, transparent = true }) {
+    return (
+        <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">
+            <Canvas
+                camera={{ position: position, fov: fov }}
+                gl={{ alpha: transparent }}
+                onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+            >
+                <ambientLight intensity={Math.PI} />
+                <Physics gravity={gravity} timeStep={1 / 60}>
+                    <Band />
+                </Physics>
+                <Environment blur={0.75}>
+                    <Lightformer intensity={2} color="white" position={[0, -1, 5]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
+                    <Lightformer intensity={3} color="white" position={[-1, -1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
+                    <Lightformer intensity={3} color="white" position={[1, 1, 1]} rotation={[0, 0, Math.PI / 3]} scale={[100, 0.1, 1]} />
+                    <Lightformer intensity={10} color="white" position={[-10, 0, 14]} rotation={[0, Math.PI / 2, Math.PI / 3]} scale={[100, 10, 1]} />
+                </Environment>
+            </Canvas>
+        </div>
+    );
+}
 
-// Komponen Lanyard, sekarang menerima prop 'isDragging'
-function LanyardStrap({ start, end, isDragging }) {
-    const strapRef = useRef();
-    const startVec = new THREE.Vector3();
-    const endVec = new THREE.Vector3();
-    const up = new THREE.Vector3(0, 1, 0);
+function Band({ maxSpeed = 50, minSpeed = 0 }) {
+    const band = useRef(), fixed = useRef(), j1 = useRef(), j2 = useRef(), j3 = useRef(), card = useRef();
+    const vec = new THREE.Vector3(), ang = new THREE.Vector3(), rot = new THREE.Vector3(), dir = new THREE.Vector3();
+    const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
 
-    useFrame(() => {
-        // HENTIKAN PEMBARUAN TALI JIKA KARTU SEDANG DISERET
-        // Ini adalah kunci untuk memperbaiki error "recursive use"
-        if (isDragging || !start.current || !end.current) {
-            return;
+    const { nodes, materials } = useGLTF("card.glb");
+    const texture = useTexture("lanyard.png");
+
+    const [curve] = useState(() => new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()]));
+    const [dragged, drag] = useState(false);
+    const [hovered, hover] = useState(false);
+    const [isSmall, setIsSmall] = useState(() =>
+        typeof window !== 'undefined' && window.innerWidth < 1024
+    );
+
+    useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
+    useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
+    useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+    useSphericalJoint(j3, card, [[0, 0, 0], [0, 1.50, 0]]);
+
+    useEffect(() => {
+        if (hovered) {
+            document.body.style.cursor = dragged ? 'grabbing' : 'grab';
+            return () => void (document.body.style.cursor = 'auto');
         }
+    }, [hovered, dragged]);
 
-        const startPosObj = start.current.translation();
-        const endPosObj = end.current.translation();
-        startVec.set(startPosObj.x, startPosObj.y, startPosObj.z);
-        endVec.set(endPosObj.x, endPosObj.y + 1, endPosObj.z);
-        const length = startVec.distanceTo(endVec);
-        strapRef.current.scale.y = length;
-        strapRef.current.position.lerpVectors(startVec, endVec, 0.5);
-        strapRef.current.quaternion.setFromUnitVectors(up, endVec.clone().sub(startVec).normalize());
+    useEffect(() => {
+        const handleResize = () => {
+            setIsSmall(window.innerWidth < 1024);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useFrame((state, delta) => {
+        if (dragged) {
+            vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
+            dir.copy(vec).sub(state.camera.position).normalize();
+            vec.add(dir.multiplyScalar(state.camera.position.length()));
+            [card, j1, j2, j3, fixed].forEach((ref) => ref.current?.wakeUp());
+            card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+        }
+        if (fixed.current) {
+            [j1, j2].forEach((ref) => {
+                if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
+                const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
+                ref.current.lerped.lerp(ref.current.translation(), delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed)));
+            });
+            curve.points[0].copy(j3.current.translation());
+            curve.points[1].copy(j2.current.lerped);
+            curve.points[2].copy(j1.current.lerped);
+            curve.points[3].copy(fixed.current.translation());
+            band.current.geometry.setPoints(curve.getPoints(32));
+            ang.copy(card.current.angvel());
+            rot.copy(card.current.rotation());
+            card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
+        }
     });
 
-    return (
-        <Box ref={strapRef} args={[0.2, 1, 0.05]} position={[0,0,0]} castShadow>
-            <meshStandardMaterial color="black" />
-        </Box>
-    );
-}
-
-// Komponen Kartu, sekarang memberikan state 'isDragging' ke LanyardStrap
-function NametagCard({ anchorRef, onDragStateChange }) {
-    const card = useRef();
-    // Kita pindahkan state isDragging ke komponen induk agar bisa di-pass ke LanyardStrap
-    // Tetapi untuk contoh ini, kita cukup panggil callback saja
-    
-    const { camera, gl } = useThree();
-    const plane = new THREE.Plane();
-    const raycaster = new THREE.Raycaster();
-    const intersection = new THREE.Vector3();
-    const cardPositionVec = new THREE.Vector3();
-
-    useRopeJoint(anchorRef, card, [[0, 0, 0], [0, 1, 0], 1.5]);
-
-    const handlePointerDown = (e) => {
-        onDragStateChange(true); // Beri tahu komponen induk bahwa drag dimulai
-        e.stopPropagation();
-        e.target.setPointerCapture(e.pointerId);
-        card.current.lockRotations(true);
-        const cardPosObj = card.current.translation();
-        cardPositionVec.set(cardPosObj.x, cardPosObj.y, cardPosObj.z);
-        camera.getWorldDirection(plane.normal);
-        plane.setFromNormalAndCoplanarPoint(plane.normal.clone(), cardPositionVec);
-    };
-
-    const handlePointerMove = (e) => {
-        // Kita tidak perlu cek isDragging di sini karena event ini hanya aktif setelah pointer down
-        const pointer = new THREE.Vector2(
-            (e.clientX / gl.domElement.clientWidth) * 2 - 1,
-            -(e.clientY / gl.domElement.clientHeight) * 2 + 1
-        );
-        raycaster.setFromCamera(pointer, camera);
-        if (raycaster.ray.intersectPlane(plane, intersection)) {
-            card.current.setNextKinematicTranslation(intersection);
-        }
-    };
-
-    const handlePointerUp = (e) => {
-        onDragStateChange(false); // Beri tahu komponen induk bahwa drag selesai
-        e.target.releasePointerCapture(e.pointerId);
-        card.current.lockRotations(false);
-    };
-
-    // Kita tambahkan onPointerLeave untuk kasus kursor keluar dari canvas saat sedang drag
-    const handlePointerLeave = (e) => {
-        onDragStateChange(false);
-        card.current.lockRotations(false);
-    }
+    curve.curveType = 'chordal';
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
     return (
-        <RigidBody
-            ref={card}
-            colliders="cuboid"
-            canSleep={false}
-            // Tipe diatur oleh komponen induk sekarang
-            // type={isDragging ? 'kinematicPosition' : 'dynamic'}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerLeave}
-            castShadow
-        >
-            {/* Visual tidak berubah */}
-             <RoundedBox args={[1.5, 2.2, 0.1]} radius={0.05} receiveShadow>
-                <meshStandardMaterial color="white" />
-            </RoundedBox>
-            <Circle args={[0.08, 32]} position={[0, 0.9, 0.051]}>
-                <meshStandardMaterial color="#333" />
-            </Circle>
-            <Box args={[0.04, 0.2, 0.1]} position={[0, 1.05, 0.05]}>
-                 <meshStandardMaterial color="black" />
-            </Box>
-            <Text position={[0, 0.4, 0.06]} fontSize={0.28} color="black" fontWeight="bold">
-                MARVIN
-            </Text>
-            <Text position={[0, 0.1, 0.06]} fontSize={0.28} color="black" fontWeight="bold">
-                MENDOZA
-            </Text>
-            <group position={[-0.4, -0.6, 0.06]}>
-                 <Text fontSize={0.4} color="black" fontWeight="bold">D</Text>
-                 <Text position={[0.2, 0, 0]} fontSize={0.4} color="black" fontWeight="bold">D</Text>
-            </group>
-            <Text position={[0.45, -0.9, 0.06]} fontSize={0.05} color="#555" anchorX="right">
-                ID-0023849
-            </Text>
-        </RigidBody>
-    );
-}
-
-// Komponen utama
-export default function PhysicsNametag() {
-    const anchor = useRef();
-    const cardRef = useRef(); // Kita butuh ref ke kartu untuk mendapatkan posisinya
-    const [isDragging, setIsDragging] = useState(false);
-
-    return (
-        <Canvas shadows camera={{ position: [0, 0, 5], fov: 50 }}>
-            <color attach="background" args={['#111']} />
-            <ambientLight intensity={1} />
-            <directionalLight position={[5, 5, 5]} intensity={1.5} castShadow />
-            <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 3} maxPolarAngle={2 * Math.PI / 3} />
-
-            <Physics gravity={[0, -20, 0]}>
-                <RigidBody ref={anchor} type="fixed" position={[0, 2.5, 0]} />
-                {/* Karena NametagCard sekarang tidak punya RigidBody sendiri,
-                    kita bungkus di sini dan teruskan state isDragging
-                */}
-                <RigidBody 
-                    ref={cardRef} 
-                    type={isDragging ? 'kinematicPosition' : 'dynamic'}
-                >
-                   <NametagCard anchorRef={anchor} onDragStateChange={setIsDragging} />
+        <>
+            <group position={[0, 4, 0]}>
+                <RigidBody ref={fixed} {...segmentProps} type="fixed" />
+                <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
+                    <BallCollider args={[0.1]} />
                 </RigidBody>
-
-                {/* Berikan state isDragging ke LanyardStrap */}
-                <LanyardStrap start={anchor} end={cardRef} isDragging={isDragging} />
-            </Physics>
-        </Canvas>
+                <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
+                    <BallCollider args={[0.1]} />
+                </RigidBody>
+                <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
+                    <BallCollider args={[0.1]} />
+                </RigidBody>
+                <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
+                    <CuboidCollider args={[0.8, 1.125, 0.01]} />
+                    <group
+                        scale={3}
+                        position={[0, -2.14, -0.05]}
+                        onPointerOver={() => hover(true)}
+                        onPointerOut={() => hover(false)}
+                        onPointerUp={(e) => (e.target.releasePointerCapture(e.pointerId), drag(false))}
+                        onPointerDown={(e) => (e.target.setPointerCapture(e.pointerId), drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation()))))}>
+                        <mesh geometry={nodes.card.geometry}>
+                            <meshPhysicalMaterial map={materials.base.map} map-anisotropy={16} clearcoat={1} clearcoatRoughness={0.15} roughness={0.9} metalness={0.8} />
+                        </mesh>
+                        <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
+                        <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+                    </group>
+                </RigidBody>
+            </group>
+            <mesh ref={band}>
+                <meshLineGeometry />
+                <meshLineMaterial
+                    color="white"
+                    depthTest={false}
+                    resolution={isSmall ? [1000, 2000] : [1000, 1000]}
+                    useMap
+                    map={texture}
+                    repeat={[-2, 1]}
+                    lineWidth={2}
+                />
+            </mesh>
+        </>
     );
 }
