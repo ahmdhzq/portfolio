@@ -16,7 +16,7 @@ const rightPanelVariants = {
 
 const CredentialsSection = () => {
     return (
-        <section className="mt-20 font-manrope">
+        <section className="my-16 font-manrope">
             <div className="container mx-auto">
                 <div className="lg:grid lg:grid-cols-2 rounded-3xl md:rounded-[3rem] overflow-hidden">
 

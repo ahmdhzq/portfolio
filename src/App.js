@@ -8,6 +8,7 @@ import ServicesSection from './components/ServicesSection';
 import SkillsRibbon from './components/SkillsRibbon';
 import MostUsefulTools from './components/MostUseFullTools';
 import CredentialsSection from './components/CredentialsSection';
+import ExperienceSection from './components/ExperienceSection';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <AboutMe/>
         <CredentialsSection />  
         <MostUsefulTools/>
+        <ExperienceSection/>
         <ServicesSection />
         <ProjectsSection />
         <SkillsRibbon />
