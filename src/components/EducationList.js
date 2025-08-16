@@ -24,7 +24,7 @@ const educationData = [
 
 const EducationList = () => {
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       {educationData.map((edu, i) => (
         <motion.div
           key={i}
@@ -35,7 +35,7 @@ const EducationList = () => {
           className="group cursor-pointer"
         >
           <motion.div 
-            className="border-b border-border-color pb-6 hover:border-text-light transition-all duration-300"
+            className="border-b border-border-color pb-3 hover:border-text-light transition-all duration-300"
             whileHover={{ x: 10 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
           >
@@ -46,7 +46,7 @@ const EducationList = () => {
               {edu.date}
             </motion.p>
             
-            <h3 className="text-3xl lg:text-4xl font-black text-text-light mb-2 leading-tight group-hover:text-text-light transition-colors duration-300">
+            <h3 className="text-3xl font-black text-text-light mb-2 leading-tight group-hover:text-text-light transition-colors duration-300">
               {edu.title}
             </h3>
             

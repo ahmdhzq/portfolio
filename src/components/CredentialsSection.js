@@ -27,9 +27,9 @@ const CredentialsSection = () => {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.3 }}
                     >
-                        <div className="space-y-6">
+                        <div className="my-8">
 
-                            <h2 className="text-5xl lg:text-6xl font-extrabold leading-tight">
+                            <h2 className="text-5xl font-extrabold leading-tight">
                                 Education
                             </h2>
 
@@ -37,7 +37,7 @@ const CredentialsSection = () => {
                                 A timeline of my academic journey and the path that shaped me into the developer I am today.
                             </p>
 
-                            <div>
+                            <div className='mt-8'>
                                 <EducationList />
                             </div>
                         </div>
