@@ -32,7 +32,7 @@ const ServicesSection = () => {
             className="font-manrope relative my-16 bg-bg-dark text-gray-100 overflow-hidden"
         >
 
-            <div className="relative mx-auto py-24 pb-16">
+            <div className="relative mx-auto py-24">
                 <motion.h2
                     className="text-4xl md:text-6xl text-center font-bold mb-6 tracking-tight"
                     initial={{ opacity: 0, y: -30 }}

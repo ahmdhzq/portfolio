@@ -9,6 +9,8 @@ import SkillsRibbon from './components/SkillsRibbon';
 import MostUsefulTools from './components/MostUseFullTools';
 import CredentialsSection from './components/CredentialsSection';
 import ExperienceSection from './components/ExperienceSection';
+import ContactSection from './components/ContactSection';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
         <ServicesSection />
         <ProjectsSection />
         <SkillsRibbon />
+        <ContactSection/>
+        <Footer/>
       </main>
     </div>
   );
