@@ -23,6 +23,22 @@ const projects = [
     tags: ["Laravel 10", "Bootstrap 5", "Reusable Components", "Efficiency"], // [cite: 72, 73]
     imageUrl: "https://picsum.photos/800/600?random=3",
   },
+  {
+    id: 4,
+    title: "Web-Based Licensing App",
+    company: "Pesantren PeTIK", // [cite: 54]
+    description: "Mengembangkan dan memelihara aplikasi perizinan dari awal, termasuk melakukan deployment ke Virtual Private Server (VPS) agar bisa diakses secara online.", // 
+    tags: ["Laravel", "Bootstrap 5", "MySQL", "VPS Deployment"], // 
+    imageUrl: "https://picsum.photos/800/600?random=2",
+  },
+  {
+    id: 5,
+    title: "Responsive App & Component System",
+    company: "STT Stikma International (Intern)", // [cite: 68]
+    description: "Merancang dan mengimplementasikan sistem komponen UI yang dapat digunakan kembali, berhasil meningkatkan efisiensi pengembangan tim sebesar 30%.", // 
+    tags: ["Laravel 10", "Bootstrap 5", "Reusable Components", "Efficiency"], // [cite: 72, 73]
+    imageUrl: "https://picsum.photos/800/600?random=3",
+  },
 ];
 
 export default projects;

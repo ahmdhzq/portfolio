@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowRight } from "react-icons/fi";
 import projects from '../data/projectData.js';
 
 const ProjectsSection = () => {
+    const [showAll, setShowAll] = useState(false);
+
+    const INITIAL_PROJECTS_COUNT = 3;
+
+    const showProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
+
     return (
         <section className="py-20 px-[8%] font-manrope">
             <div className="text-center mb-14">
@@ -27,8 +33,8 @@ const ProjectsSection = () => {
                 </motion.p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                {projects.map((project, index) => {
+            <div className="flex flex-wrap justify-center gap-12">
+                {showProjects.map((project, index) => {
 
                     return (
                         <motion.div
@@ -37,7 +43,7 @@ const ProjectsSection = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="relative w-full max-w-md mx-auto aspect-[230/258]"
+                            className="relative w-full max-w-md aspect-[230/258] lg:w-[calc(33.33%-2rem)] md:w-[calc(50%-1.5rem)]"
                         >
                             <svg
                                 viewBox="0 0 230 258"
@@ -77,7 +83,7 @@ const ProjectsSection = () => {
                                     </div>
                                 </div>
 
-                                <div className="absolute bottom-2 right-2 w-20 h-20 rounded-full flex items-center justify-center cursor-pointer bg-bg-card text-white border-2 border-bg-card hover:bg-transparent hover:border-bg-card hover:text-bg-card transition-all duration-300 ease-in-out
+                                <div className="absolute bottom-2 right-2 h-16 w-16 md:w-20 md:h-20 rounded-full flex items-center justify-center cursor-pointer bg-bg-card text-white border-2 border-bg-card hover:bg-transparent hover:border-bg-card hover:text-bg-card transition-all duration-300 ease-in-out
 ">
                                     <FiArrowRight className="text-2xl" />
                                 </div>
@@ -85,6 +91,21 @@ const ProjectsSection = () => {
                         </motion.div>
                     );
                 })}
+            </div>
+
+            <div className='mt-16 flex justify-center'>
+                {!showAll && projects.length > INITIAL_PROJECTS_COUNT && (
+                    <motion.button
+                        onClick={() => setShowAll(true)}
+                        className='bg-bg-card text-white px-6 py-3 rounded-full font-semibold hover:bg-transparent hover:text-bg-card border-2 border-bg-card transition-all duration-300 flex items-center gap-2'
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        Show All Projects
+                        <FiArrowRight className="text-lg" />
+                    </motion.button>
+                )}
             </div>
         </section>
     );
