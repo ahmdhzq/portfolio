@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiArrowRight } from "react-icons/fi";
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiArrowRight, FiArrowDown } from "react-icons/fi";
 import projects from '../data/projectData.js';
+import ProjectDetailModal from './ProjectDetailModal';
 
 const ProjectsSection = () => {
     const [showAll, setShowAll] = useState(false);
+    const [selectedProject, setSelectedProject] = useState(null);
 
     const INITIAL_PROJECTS_COUNT = 3;
 
-    const showProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
+    const projectsToShow = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
 
     return (
         <section className="py-20 px-[8%] font-manrope">
@@ -33,8 +35,8 @@ const ProjectsSection = () => {
                 </motion.p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-12">
-                {showProjects.map((project, index) => {
+            <div className="flex flex-wrap justify-center gap-10">
+                {projectsToShow.map((project, index) => {
 
                     return (
                         <motion.div
@@ -43,7 +45,7 @@ const ProjectsSection = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="relative w-full max-w-md aspect-[230/258] lg:w-[calc(33.33%-2rem)] md:w-[calc(50%-1.5rem)]"
+                            className="relative w-full max-w-sm aspect-[230/258] md:w-[calc(33.33%-1.66rem)]"
                         >
                             <svg
                                 viewBox="0 0 230 258"
@@ -71,22 +73,28 @@ const ProjectsSection = () => {
                                         <h3 className="text-2xl font-bold text-text-light mb-1">
                                             {project.title}
                                         </h3>
-                                        {/* <p className="text-sm text-gray-600 leading-relaxed line-clamp-2">
-                                            {project.description}
-                                        </p> */}
                                     </div>
-                                    <div className="flex justify-between items-end">
-                                        <div className="flex flex-col gap-0 text-md text-text-gray">
-                                            <span>Duration: {project.duration}</span>
-                                            <span>Conversion: {project.conversion}</span>
+                                    <div className="flex justify-between items-end max-w-[80%]">
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.tags.map(tag => (
+                                                <span
+                                                    key={tag}
+                                                    className="bg-white/10 text-text-gray text-xs font-semibold px-3 py-1 rounded-full"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="absolute bottom-2 right-2 h-16 w-16 md:w-20 md:h-20 rounded-full flex items-center justify-center cursor-pointer bg-bg-card text-white border-2 border-bg-card hover:bg-transparent hover:border-bg-card hover:text-bg-card transition-all duration-300 ease-in-out
-">
+                                <button
+                                    onClick={() => setSelectedProject(project)}
+                                    className="absolute bottom-2 right-2 h-16 w-16 md:w-20 md:h-20 rounded-full flex items-center justify-center cursor-pointer bg-bg-card text-white border-2 border-bg-card hover:bg-transparent hover:border-bg-card hover:text-bg-card transition-all duration-300 ease-in-out"
+                                    aria-label={`View details for ${project.title}`}
+                                >
                                     <FiArrowRight className="text-2xl" />
-                                </div>
+                                </button>
                             </div>
                         </motion.div>
                     );
@@ -103,10 +111,19 @@ const ProjectsSection = () => {
                         transition={{ duration: 0.5 }}
                     >
                         Show All Projects
-                        <FiArrowRight className="text-lg" />
+                        <FiArrowDown />
                     </motion.button>
                 )}
             </div>
+
+            <AnimatePresence>
+                {selectedProject && (
+                    <ProjectDetailModal
+                        project={selectedProject}
+                        onClose={()=>setSelectedProject(null)}
+                    />
+                )}
+            </AnimatePresence>
         </section>
     );
 };
