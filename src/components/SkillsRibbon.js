@@ -53,7 +53,7 @@ const skills = [
 
 const SkillsRibbon = () => {
     return (
-        <section className="relative -mx-2 py-16">
+        <section className="relative py-16">
             <div className="relative">
                 <RibbonWrapper>
                     <motion.div
@@ -70,7 +70,7 @@ const SkillsRibbon = () => {
                                 key={index}
                                 className="flex items-center gap-2 text-lg font-semibold tracking-wide"
                             >
-                                <FaCheckCircle className="text-green-400" />
+                                <FaCheckCircle className="text-text-light" />
                                 {skill}
                             </span>
                         ))}
@@ -97,7 +97,7 @@ const SkillsRibbon = () => {
                                 key={index}
                                 className="flex items-center gap-2 text-lg font-semibold tracking-wide"
                             >
-                                <FaCheckCircle className="text-green-400" />
+                                <FaCheckCircle className="text-text-light" />
                                 {skill}
                             </span>
                         ))}

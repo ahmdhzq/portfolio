@@ -1,37 +1,65 @@
 import React from 'react';
-import { FiMail, FiLinkedin } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiGithub, FiLinkedin, FiTwitter, FiInstagram } from 'react-icons/fi';
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+    },
+};
+
+const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+};
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear();
+    const socialLinks = [
+        { icon: <FiGithub />, url: 'https://github.com' },
+        { icon: <FiLinkedin />, url: 'https://linkedin.com' },
+        { icon: <FiTwitter />, url: 'https://twitter.com' },
+        { icon: <FiInstagram />, url: 'https://instagram.com' },
+    ];
 
     return (
-        <footer className="bg-bg-dark text-text-gray py-10 px-6 font-manrope">
-            <div className="max-w-7xl mx-auto text-center">
-                {/* Bagian Atas: Nama & Social Links */}
-                <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-text-light mb-2">Ahmad Haziq M.W.</h3>
-                    <p className="max-w-md mx-auto mb-6">
-                        A Frontend Developer focused on creating beautiful and functional web experiences.
-                    </p>
-                    <div className="flex justify-center items-center gap-6">
-                        <a href="mailto:haziexahmad18@gmail.com" aria-label="Email" className="hover:text-text-light transition-colors">
-                            <FiMail size={24} />
-                        </a>
-                        <a href="https://linkedin.com/in/ahmdhzq18/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-text-light transition-colors">
-                            <FiLinkedin size={24} />
-                        </a>
-                    </div>
-                </div>
+        <section className="font-manrope">
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className="relative mx-auto bg-bg-dark border"
+            >
 
-                {/* Garis Pemisah */}
-                <hr className="border-border-color w-1/2 mx-auto mb-6" />
+                <motion.div
+                    className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center p-8 md:py-12"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.5 }}
+                >
+                    <motion.div variants={itemVariants} className="flex items-center gap-6 mb-6">
+                        {socialLinks.map((link, index) => (
+                            <a
+                                key={index}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-text-gray hover:text-white transition-colors duration-300"
+                            >
+                                {React.cloneElement(link.icon, { size: 24 })}
+                            </a>
+                        ))}
+                    </motion.div>
 
-                {/* Bagian Bawah: Copyright */}
-                <div className="text-sm">
-                    <p>&copy; {currentYear} Ahmad Haziq. All Rights Reserved.</p>
-                </div>
-            </div>
-        </footer>
+                    <motion.p variants={itemVariants} className="text-text-gray text-sm">
+                        &copy; {new Date().getFullYear()} Ahmad Haziq. All Rights Reserved.
+                    </motion.p>
+                </motion.div>
+            </motion.div>
+        </section>
     );
 };
 

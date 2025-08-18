@@ -90,7 +90,7 @@ const ProjectsSection = () => {
 
                                 <button
                                     onClick={() => setSelectedProject(project)}
-                                    className="absolute bottom-2 right-2 h-16 w-16 md:w-20 md:h-20 rounded-full flex items-center justify-center cursor-pointer bg-bg-card text-white border-2 border-bg-card hover:bg-transparent hover:border-bg-card hover:text-bg-card transition-all duration-300 ease-in-out"
+                                    className="absolute bottom-1 right-1 h-16 w-16 md:w-20 md:h-20 rounded-full flex items-center justify-center cursor-pointer bg-bg-card text-white border-2 border-bg-card hover:bg-transparent hover:border-bg-card hover:text-bg-card transition-all duration-300 ease-in-out"
                                     aria-label={`View details for ${project.title}`}
                                 >
                                     <FiArrowRight className="text-2xl" />

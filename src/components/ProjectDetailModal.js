@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { IoClose } from 'react-icons/io5';
 import { FaGithub } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 
@@ -15,82 +14,82 @@ const ProjectDetailModal = ({ project, onClose }) => {
             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={onClose}
         >
-            {/* Panel Modal */}
             <motion.div
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 50, opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                // PERUBAHAN 1: Ukuran modal diperbesar dari 4xl ke 5xl
-                // PERUBAHAN 2: Tema diubah menjadi dark theme (bg-bg-card)
-                className="bg-bg-card text-text-light rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-2xl border border-border-color"
+                className="relative w-full max-w-5xl aspect-[838/488]"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Tombol Close */}
-                <button
-                    onClick={onClose}
-                    // PERUBAHAN 2: Warna tombol close disesuaikan
-                    className="absolute top-4 right-4 text-text-gray hover:text-text-light transition-colors z-10"
+                <svg
+                    viewBox="0 0 838 488"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="absolute inset-0 w-full h-full fill-bg-dark stroke-border-color"
+                    strokeWidth="1.5"
                 >
-                    <IoClose size={28} />
-                </button>
-
-                {/* Kolom Kiri: Gambar Proyek */}
-                <div className="w-full md:w-1/2 flex-shrink-0">
-                    <img
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="w-full h-64 md:h-full object-cover"
+                    <path
+                        d="M140 1c-20.158 0-36.5 16.342-36.5 36.5S87.158 74 67 74H51C23.386 74 1 96.386 1 124v313c0 27.614 22.386 50 50 50h736c27.614 0 50-22.386 50-50V124c0-27.614-22.386-50-50-50h-15c-20.158 0-36.5-16.342-36.5-36.5S719.158 1 699 1z"
                     />
-                </div>
+                </svg>
 
-                {/* Kolom Kanan: Detail Proyek */}
-                <div className="w-full md:w-1/2 p-8 flex flex-col overflow-y-auto">
-                    {/* PERUBAHAN 2: Warna teks disesuaikan */}
-                    <h2 className="text-4xl font-extrabold text-text-light mb-2">{project.title}</h2>
+                <div className='relative z-10 h-full w-full flex flex-col justify-center items-center p-4 gap-y-3 pt-10'>
+                    <h2 className="text-4xl font-extrabold text-text-light text-center">{project.title}</h2>
+                    <div className="flex flex-col justify-center h-full items-center md:flex-row overflow-hidden">
+                        <div className="w-full md:w-1/2 h-full flex-shrink-0 p-6 py-9">
+                            <div className="w-full h-full rounded-3xl overflow-hidden">
+                                <img
+                                    src={project.imageUrl}
+                                    alt={project.title}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        </div>
 
-                    <p className="text-text-gray leading-relaxed mb-6">
-                        {project.description}
-                    </p>
+                        <div className="w-full md:w-1/2 p-8 pt-4 flex flex-col overflow-y-auto">
+                            <p className="text-text-gray leading-relaxed mb-6">
+                                {project.description}
+                            </p>
 
-                    <h3 className="text-lg font-semibold text-text-light mb-3">
-                        Technologies & Tags
-                    </h3>
-                    <div className="flex flex-wrap gap-2 mb-8">
-                        {project.tags.map(tag => (
-                            <span
-                                key={tag}
-                                // PERUBAHAN 2: Warna tag disesuaikan
-                                className="bg-border-color text-text-gray text-sm font-medium px-3 py-1 rounded-full"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
+                            <h3 className="text-lg font-semibold text-text-light mb-3">
+                                Technologies & Tags
+                            </h3>
+                            <div className="flex flex-wrap gap-2 mb-8">
+                                {project.tags.map(tag => (
+                                    <span
+                                        key={tag}
+                                        className="bg-border-color text-text-gray text-sm font-medium px-3 py-1 rounded-full"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
 
-                    <div className="mt-auto flex items-center gap-4 pt-6 border-t border-border-color">
-                        {project.githubUrl && (
-                            <a
-                                href={project.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-text-gray font-semibold py-2 px-4 rounded-lg border border-border-color hover:text-text-light hover:bg-border-color transition-all"
-                            >
-                                <FaGithub />
-                                View Code
-                            </a>
-                        )}
-                        {project.livePreviewUrl && (
-                            <a
-                                href={project.livePreviewUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-bg-dark font-bold py-2 px-4 rounded-lg bg-text-light hover:bg-opacity-80 transition-all"
-                            >
-                                <FiExternalLink />
-                                Live Preview
-                            </a>
-                        )}
+                            <div className="mt-auto flex items-center gap-4 pt-6 border-t border-border-color">
+                                {project.githubUrl && (
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 px-6 py-3 rounded-full text-text-gray border border-border-color hover:text-text-light hover:bg-border-color cursor-pointer transition-all duration-200"
+                                    >
+                                        <FaGithub />
+                                        View Code
+                                    </a>
+                                )}
+                                {project.livePreviewUrl && (
+                                    <a
+                                        href={project.livePreviewUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 px-6 py-3 rounded-full text-bg-dark bg-text-light font-semibold text-base cursor-pointer transition-all duration-200 hover:bg-opacity-80"
+                                    >
+                                        <FiExternalLink />
+                                        Live Preview
+                                    </a>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </motion.div>
