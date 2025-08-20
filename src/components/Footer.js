@@ -17,10 +17,10 @@ const itemVariants = {
 
 const Footer = () => {
     const socialLinks = [
-        { icon: <FiGithub />, url: 'https://github.com' },
-        { icon: <FiLinkedin />, url: 'https://linkedin.com' },
-        { icon: <FiTwitter />, url: 'https://twitter.com' },
-        { icon: <FiInstagram />, url: 'https://instagram.com' },
+        { icon: <FiGithub />, url: 'https://github.com/ahmdhzq' },
+        { icon: <FiLinkedin />, url: 'https://www.linkedin.com/in/ahmdhzq18/' },
+        { icon: <FiTwitter />, url: 'https://twitter.com/Ahmadha24700995' },
+        { icon: <FiInstagram />, url: 'https://www.instagram.com/ahmd_haziqqq/' },
     ];
 
     return (
