@@ -19,7 +19,6 @@ const ContactSection = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // You can add your form submission logic here.
         console.log("Form submitted!");
         const formData = new FormData(event.target);
         const data = Object.fromEntries(formData.entries());
@@ -29,7 +28,7 @@ const ContactSection = () => {
     };
 
     return (
-        <section id="contact" className="pt-24 pb-8 px-4 font-manrope">
+        <section id="contact" className="pt-28 pb-10 px-4 font-manrope">
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}

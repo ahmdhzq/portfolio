@@ -14,11 +14,11 @@ const BaseRibbon = styled.div`
 `;
 
 const RibbonWrapper = styled(BaseRibbon)`
-  transform: rotate(-4deg) translateY(30px);
+  transform: rotate(-5deg) translateY(30px);
 `;
 
 const RibbonWrapperReverse = styled(BaseRibbon)`
-  transform: rotate(4deg) translateY(-30px);
+  transform: rotate(5deg) translateY(-30px);
 `;
 
 const GradientFade = styled.div`
@@ -53,7 +53,7 @@ const skills = [
 
 const SkillsRibbon = () => {
     return (
-        <section className="relative py-16">
+        <section className="relative -mx-3">
             <div className="relative">
                 <RibbonWrapper>
                     <motion.div
