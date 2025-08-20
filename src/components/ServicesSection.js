@@ -6,22 +6,22 @@ const servicesData = [
     {
         link: "#",
         text: "Web Development",
-        image: "https://picsum.photos/800/600?random=1",
+        image: "/assets/web.jpg",
     },
     {
         link: "#",
         text: "UI/UX Design",
-        image: "https://picsum.photos/800/600?random=2",
+        image: "/assets/ui.png",
     },
     {
         link: "#",
         text: "Database Management",
-        image: "https://picsum.photos/800/600?random=3",
+        image: "/assets/data.jpg",
     },
     {
         link: "#",
         text: "System Integration",
-        image: "https://picsum.photos/800/600?random=4",
+        image: "/assets/system.jpg",
     },
 ];
 
