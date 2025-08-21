@@ -63,7 +63,7 @@ const itemVariants = {
 
 const AboutMe = () => {
     return (
-        <div className="py-12 px-[10%] font-manrope bg-bg-light">
+        <section id='about' className="py-12 px-[10%] font-manrope bg-bg-light">
             <motion.div 
                 className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-start"
                 variants={containerVariants}
@@ -114,7 +114,7 @@ const AboutMe = () => {
                     </motion.div>
                 </motion.div>
             </motion.div>
-        </div>
+        </section>
     );
 };
 

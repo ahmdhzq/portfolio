@@ -13,7 +13,7 @@ const ProjectsSection = () => {
     const projectsToShow = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
 
     return (
-        <section className="py-14 px-[8%] font-manrope">
+        <section id='projects' className="py-14 px-[8%] font-manrope">
             <div className="text-center mb-14">
                 <motion.h2
                     initial={{ opacity: 0, y: -20 }}

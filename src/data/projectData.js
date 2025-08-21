@@ -40,7 +40,8 @@ const projects = [
     title: "Masterprima Company Profile & Blog",
     description: "A professional company profile website for Masterprima, designed to showcase their services and brand identity. The site includes a fully integrated Content Management System (CMS) that allows administrators to easily create, update, and manage blog articles.",
     tags: ["React", "LMS", "CRUD", "Admin Panel", "Education"], 
-    imageUrl: "/assets/masterprima.png"
+    imageUrl: "/assets/masterprima.png",
+    livePreviewUrl: "https://blog-masterprima.wuaze.com"
   },
   
 ];
