@@ -11,7 +11,7 @@ extend({ MeshLineGeometry, MeshLineMaterial });
 
 export default function Lanyard({ position = [0, 0, 22], gravity = [0, -40, 0], fov = 17, transparent = true }) {
     return (
-        <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">
+        <div className="relative z-0 w-full h-full flex justify-center items-center transform scale-100 origin-center">
             <Canvas
                 camera={{ position: position, fov: fov }}
                 gl={{ alpha: transparent }}
@@ -136,7 +136,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
                     useMap
                     map={texture}
                     repeat={[-2, 1]}
-                    lineWidth={2}
+                    lineWidth={1.8}
                 />
             </mesh>
         </>

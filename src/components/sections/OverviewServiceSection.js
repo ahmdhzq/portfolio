@@ -1,5 +1,5 @@
 import React from 'react';
-import FeatureCard from './FeaturedCard';
+import FeatureCard from '../ui/FeaturedCard';
 import { motion } from 'framer-motion';
 
 const containerVariants = {
@@ -23,7 +23,8 @@ const itemVariants = {
     }
 };
 
-const WhyWorkWithUs = () => {
+const OverviewServiceSection
+ = () => {
   return (
     <motion.div 
         className="py-20 px-[10%] font-manrope"
@@ -65,4 +66,5 @@ const WhyWorkWithUs = () => {
   );
 };
 
-export default WhyWorkWithUs;
+export default OverviewServiceSection
+;

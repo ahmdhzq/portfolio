@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <>
             <div className="fixed container top-4 left-1/2 -translate-x-1/2 z-50">
-                <div className="bg-bg-dark/20 backdrop-blur-lg text-text-light py-2.5 px-6 rounded-full shadow-lg border border-white/10">
+                <div className="bg-bg-dark/60 backdrop-blur-lg text-text-light py-2.5 px-6 rounded-full shadow-lg border border-white/10">
                     <nav className='flex items-center justify-between'>
                         <ul className="flex items-center gap-x-6 text-lg font-bold">
                             <Link 
@@ -46,7 +46,7 @@ const Navbar = () => {
             </div>
 
             <div className="fixed container top-4 left-1/2 -translate-x-1/2 -z-50">
-                <div className="bg-bg-dark py-6 px-6 rounded-full">
+                <div className="bg-black py-6 px-6 rounded-full">
                 </div>
             </div>
         </>

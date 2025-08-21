@@ -43,7 +43,7 @@ const imageVariants = {
 
 const HeroSection = () => {
     return (
-        <section id='home' className="bg-bg-dark mt-20 container mx-auto text-text-light rounded-3xl md:rounded-[3rem]">
+        <section id='home' className="bg-bg-dark mt-24 container mx-auto text-text-light rounded-3xl md:rounded-[3rem]">
             <motion.div
                 className="flex flex-col lg:flex-row justify-between items-center py-16 mb-10 px-[10%] gap-10 font-manrope"
                 variants={containerVariants}

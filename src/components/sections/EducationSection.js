@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import EducationList from './EducationList';
-import NametagCard from './NametagCard';
+import EducationList from '../layout/EducationList';
+import NametagCard from '../ui/NametagCard';
 
 const leftPanelVariants = {
     hidden: { x: -50, opacity: 0 },
@@ -14,14 +14,14 @@ const rightPanelVariants = {
 };
 
 
-const CredentialsSection = () => {
+const EducationSection = () => {
     return (
         <section className="my-16 font-manrope">
             <div className="container mx-auto">
                 <div className="lg:grid lg:grid-cols-2 rounded-3xl md:rounded-[3rem] overflow-hidden">
 
                     <motion.div
-                        className="bg-bg-dark text-text-light p-12 md:p-28 md:py-8 flex flex-col justify-center"
+                        className="bg-bg-dark text-text-light p-12 md:p-28 md:py-16 flex flex-col justify-center"
                         variants={leftPanelVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -59,4 +59,4 @@ const CredentialsSection = () => {
     );
 };
 
-export default CredentialsSection;
+export default EducationSection;

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import FlowingMenu from "./FlowlingMenu";
+import FlowingMenu from "../layout/FlowlingMenu";
 
 const servicesData = [
     {

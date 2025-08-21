@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { tools } from "../data/toolData";
-import ToolCard from "./ToolCard";
+import { tools } from "../../data/toolData";
+import ToolCard from "../ui/ToolCard";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -11,12 +11,11 @@ const containerVariants = {
     }
 };
 
-const MostUsefulTools = () => {
+const ToolsSection = () => {
     return (
         <section className="py-20 text-black">
             <div className="container mx-auto px-6 text-center">
 
-                {/* Judul */}
                 <motion.h2
                     className="text-4xl font-bold mb-16"
                     initial={{ opacity: 0, y: -20 }}
@@ -27,7 +26,6 @@ const MostUsefulTools = () => {
                     Most Used <span className="text-gray-500">Tools</span>
                 </motion.h2>
 
-                {/* Grid Ikon */}
                 <motion.div
                     className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-y-8"
                     variants={containerVariants}
@@ -49,4 +47,4 @@ const MostUsefulTools = () => {
     );
 };
 
-export default MostUsefulTools;
+export default ToolsSection;

@@ -2,7 +2,7 @@ import React from 'react';
 import { BsBriefcase, BsCodeSlash } from "react-icons/bs";
 import { IoRocketOutline } from "react-icons/io5";
 import { GoVerified } from "react-icons/go";
-import DownloadButton from './DownloadButton';
+import DownloadButton from "../ui/DownloadButton"
 import { motion } from 'framer-motion';
 
 const StatItem = ({ icon, value, label, isBlack = false }) => {
@@ -61,7 +61,7 @@ const itemVariants = {
     }
 };
 
-const AboutMe = () => {
+const AboutSection = () => {
     return (
         <section id='about' className="py-12 px-[10%] font-manrope bg-bg-light">
             <motion.div 
@@ -118,4 +118,4 @@ const AboutMe = () => {
     );
 };
 
-export default AboutMe;
+export default AboutSection;

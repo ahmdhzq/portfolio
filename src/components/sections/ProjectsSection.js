@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiArrowDown } from "react-icons/fi";
-import projects from '../data/projectData.js';
-import ProjectDetailModal from './ProjectDetailModal';
+import projects from '../../data/projectData.js';
+import ProjectDetailModal from '../layout/ProjectDetailModal';
 
 const ProjectsSection = () => {
     const [showAll, setShowAll] = useState(false);
