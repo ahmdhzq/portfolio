@@ -23,21 +23,23 @@ const itemVariants = {
     }
 };
 
-const OverviewServiceSection
- = () => {
+const OverviewServiceSection = () => {
   return (
     <motion.div 
-        className="py-20 px-[10%] font-manrope"
+        className="py-20 px-6 md:px-12 lg:px-16 font-manrope"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={containerVariants}
     >
       <motion.h2 
-        className="text-5xl font-extrabold text-center mb-12 flex justify-center items-center gap-4"
+        className="text-4xl md:text-5xl font-extrabold text-center mb-12 flex flex-col sm:flex-row justify-center items-center gap-4"
         variants={itemVariants}
       >
-        How I Build <span className='bg-bg-dark text-text-light px-6 py-3 rounded-full font-extralight text-2xl'>Great App</span>
+        How I Build 
+        <span className='bg-bg-dark text-text-light px-5 py-2 sm:px-6 sm:py-3 rounded-full font-extralight text-xl sm:text-2xl whitespace-nowrap'>
+          Great App
+        </span>
       </motion.h2>
       
       <motion.div 
@@ -66,5 +68,4 @@ const OverviewServiceSection
   );
 };
 
-export default OverviewServiceSection
-;
+export default OverviewServiceSection;

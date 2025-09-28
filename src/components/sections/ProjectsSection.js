@@ -10,11 +10,12 @@ const ProjectsSection = () => {
 
     const INITIAL_PROJECTS_COUNT = 3;
 
-    const projectsToShow = showAll ? projects : projects.slice(0, INITIAL_PROJECTS_COUNT);
+    const sortedProjects = [...projects].sort((a, b) => b.id - a.id);
+    const projectsToShow = showAll ? sortedProjects : sortedProjects.slice(0, INITIAL_PROJECTS_COUNT);
 
     return (
-        <section id='projects' className="py-14 px-[8%] font-manrope">
-            <div className="text-center mb-14">
+        <section id='projects' className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 font-manrope">
+            <div className="text-center mb-14 max-w-3xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -29,15 +30,14 @@ const ProjectsSection = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                     viewport={{ once: true }}
-                    className="mt-4 text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto"
+                    className="mt-4 text-base md:text-lg text-gray-600 leading-relaxed"
                 >
                     A curated list of projects I’ve worked on recently, showcasing my skills in design & development.
                 </motion.p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto">
                 {projectsToShow.map((project, index) => {
-
                     return (
                         <motion.div
                             key={project.id}
@@ -45,7 +45,7 @@ const ProjectsSection = () => {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="relative w-full max-w-sm aspect-[230/258] md:w-[calc(33.33%-1.66rem)]"
+                            className="relative w-full aspect-[230/258]"
                         >
                             <svg
                                 viewBox="0 0 230 258"
@@ -70,7 +70,7 @@ const ProjectsSection = () => {
                                 </div>
                                 <div className="flex-1 p-5 flex flex-col justify-between">
                                     <div>
-                                        <h3 className="text-2xl font-bold text-text-light mb-1">
+                                        <h3 className="text-xl sm:text-2xl font-bold text-text-light mb-1">
                                             {project.title}
                                         </h3>
                                     </div>
@@ -102,7 +102,7 @@ const ProjectsSection = () => {
             </div>
 
             <div className='mt-16 flex justify-center'>
-                {!showAll && projects.length > INITIAL_PROJECTS_COUNT && (
+                {!showAll && sortedProjects.length > INITIAL_PROJECTS_COUNT && (
                     <motion.button
                         onClick={() => setShowAll(true)}
                         className='bg-bg-card text-white px-6 py-3 rounded-full font-semibold hover:bg-transparent hover:text-bg-card border-2 border-bg-card transition-all duration-300 flex items-center gap-2'
@@ -120,7 +120,7 @@ const ProjectsSection = () => {
                 {selectedProject && (
                     <ProjectDetailModal
                         project={selectedProject}
-                        onClose={()=>setSelectedProject(null)}
+                        onClose={() => setSelectedProject(null)}
                     />
                 )}
             </AnimatePresence>
