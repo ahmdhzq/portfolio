@@ -76,13 +76,13 @@ const ProjectDetailModal = ({ project, onClose }) => {
                 </button>
 
                 <div className='relative z-10 h-full w-full flex flex-col p-4 sm:p-6 md:p-4'>
-                    <h2 className="text-xl sm:text-2xl md:text-4xl font-extrabold text-text-light text-center sm:pt-8 pb-4 flex-shrink-0">
+                    <h2 className="text-xl sm:text-2xl md:text-4xl font-extrabold text-text-light max-w-60 mx-auto text-center pt-2 sm:pt-8 pb-4 flex-shrink-0">
                         {project.title}
                     </h2>
 
                     <div className="flex flex-col md:flex-row flex-1 h-full overflow-hidden">
 
-                        <div className="w-full md:w-1/2 flex-shrink-0 h-48 sm:h-64 md:h-full p-2 md:p-6 md:py-9">
+                        <div className="w-full md:w-1/2 flex-shrink-0 h-48 sm:h-64 md:h-full pt-4 sm:pt-0 p-2 md:p-6 md:py-9">
                             <div className="w-full h-full rounded-2xl md:rounded-3xl overflow-hidden">
                                 <img
                                     src={project.imageUrl}
